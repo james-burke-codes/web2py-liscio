@@ -33,12 +33,12 @@ def index():
 
 	## SQLFORM parameters
 	links = [dict(header='URL', body=lambda row: URL('default', 'page', args=[row.title]) if row.page_index != 0 else '/'), lambda row: A(SPAN(_class='icon magnifier icon-zoom-in'),SPAN(_class='buttontext button', _title='View'), 'Preview', _class='w2p_trap button btn', _href=URL("admin", "page_preview",args=[row.id]))]
-	query = db.cms_page.id>0 #.main_menu == False
+	query = db.cms_page.id>0
 	fields = [db.cms_page.id, db.cms_page.title, db.cms_page.main_menu, db.cms_page.published, db.cms_page.parent_menu, db.cms_page.members_only, db.cms_page.page_index]
 	orderby = [db.cms_page.page_index]
 
 	form = SQLFORM.grid(query=query, links=links, fields=fields, orderby=orderby, deletable=deletable, searchable=True, details=False, csv=False, search_widget=clear_cache_btn)
-	#.add_button('Clear Cache', cache.ram.clear())
+	
 	return dict(form=form)
 
 

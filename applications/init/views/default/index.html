@@ -1,4 +1,7 @@
-{{left_sidebar_enabled,right_sidebar_enabled=False,('message' in globals())}}
+{{if index['side']:}}
+	{{right_sidebar_enabled=True}}
+	{{pass}}
+
 {{extend 'layout.html'}}
 
 {{block header}}

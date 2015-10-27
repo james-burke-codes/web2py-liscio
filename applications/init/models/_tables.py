@@ -37,7 +37,7 @@ db.cms_page.page_index.required = False
 
 # Restrict the parent menu to only existing pages in the main menu - 2 tier menu system.
 db.cms_page.parent_menu.requires = IS_EMPTY_OR(IS_IN_DB(
-    db((db.cms_page.main_menu == True) & (db.cms_page.parent_menu == None)), db.cms_page.id, 'cms_page.title'))
+    db((db.cms_page.main_menu == True)), db.cms_page.id, 'cms_page.title'))
 
 # Create a default page index, total + 1 of pages in the main menu
 db.cms_page.page_index.default = len(db((db.cms_page.id>0) & (db.cms_page.main_menu == True)).select(db.cms_page.ALL))

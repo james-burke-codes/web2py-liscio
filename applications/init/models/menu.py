@@ -51,7 +51,7 @@ response.menu = [
     (T('Home'), False, URL('default', 'index'), [])
 ]
 
-def _():
+def create_menu():
     import urllib
 
     # shortcuts
@@ -70,12 +70,17 @@ def _():
         if cms_page.page_index == 0:
             response.title = cms_page.title
         else:
-            if cms_page.published and cms_page.parent_menu == None and not cms_page.url:
-                response.menu+=[ (T(cms_page.title), True if active_page == str(cms_page.title.lower()) else False, URL('default','page/%s/%s' % (cms_page.id, cms_page.title.lower())), [
-                        (T(i.title), True if active_page == str(i.title.lower()) else False, URL('default','page/%s/%s' % (i.id, i.title.lower())), []) for i in db((db.cms_page.page_index > 0) & (db.cms_page.parent_menu == cms_page.id)).select(db.cms_page.id, db.cms_page.title, db.cms_page.parent_menu, db.cms_page.page_index, orderby=[db.cms_page.page_index]) if i.parent_menu == cms_page.id
-                    ]) ]
+            if cms_page.published and not cms_page.parent_menu and not cms_page.url:
+                sub_items = []
+                
+                for i in db((db.cms_page.page_index > 0) & (db.cms_page.parent_menu == cms_page.id)).select(db.cms_page.id, db.cms_page.title, db.cms_page.parent_menu, db.cms_page.page_index, orderby=[db.cms_page.page_index]):
+                    sub_items += (T(i.title), True if active_page == str(i.title.lower()) else False, URL('default','page/%s/%s' % (i.id, i.title.lower())), [])
+                
+                response.menu+=[ (T(cms_page.title), True if active_page == str(cms_page.title.lower()) else False, URL('default','page/%s/%s' % (cms_page.id, cms_page.title.lower())), [sub_items]) ]
             elif cms_page.url:
                 response.menu+=[ (T(cms_page.title), True if active_page == str(cms_page.title.lower()) else False, cms_page.url, []) ]
-_()
+
+create_menu()
 
 if "auth" in locals(): auth.wikimenu()
+
