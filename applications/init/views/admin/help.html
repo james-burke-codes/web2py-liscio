@@ -1,0 +1,101 @@
+{{extend 'admin/layout.html'}}
+<h1>Help</h1>
+<hr/>
+<h2>Contents</h2>
+<ol>
+	<li><a href="#Basic Table Usage">Basic Table Usage</a></li>
+	<li><a href="#Pages">Pages</a></li>
+	<ol>
+		<li><a href="#Index Page">Index Page</a></li>
+		<li><a href="#Content Pages">Content Pages</a></li>
+		<li><a href="#Orphan Pages">Orphan Pages</a></li>
+	</ol>
+	<ol>
+		<li><a href="#Searching">Searching</a></li>
+		<li><a href="#Exporting">Exporting</a></li>
+		<li><a href="#Deleting">Deleting</a></li>
+	</ol>
+	<li><a href="#Files">Files</a></li>
+	<li><a href="#Users">Users - Super Admin Only</a></li>
+	<ol>
+		<li><a href="#Groups">Groups</a></li>
+	</ol>
+	<li><a href="#CSS">CSS - Super Admin Only</a></li>
+</ol>
+
+<hr/>
+
+<h2><a name="Basic Table Usage">Basic Table Usage</a></h2>
+	<p>
+		The Admin sections Pages, Files and Users all have the same tabular format, although some functions may be disabled on tables.
+	</p>
+
+<hr/>
+<h2><a name="Pages">Pages</a></h2>
+	<p>
+		The Pages section allows admins to manage the content on the site.
+	</p>
+	<h3><a name="Index Page">Index Page</a></h3>
+	<p>
+		The index page has a sequence of 0, and should be the only page with a sequence of 0. It is generally the first page users will visit when coming to the site. Although other pages may be deleted the index page should not be so this feature has been disabled.
+	</p>
+	<p>
+		The title for the index page can be edited to change the title of the site, which appears when users save the page and is the heading for the tab the site is in.
+	</p>
+	<h3><a name="Content Pages">Content Pages</a></h3>
+	<p>
+		Additional pages can be added to your website.
+	</p>
+	<ul>
+		<li>Title - the title will appear at the top of the page, it is also used in the main menu and the URL used to request the page.</li>
+		<li>Url - if you wish to add a link in the main menu to an external site, then adding the url to that site in url will redirect the user to that site.</li>
+		<li>Main Menu - when ticked will show the pages title in the main menu.</li>
+		<li>Body - the content displayed on the page. The body text area uses a rich text editor called CKEditor, please visit their <a href='http://docs.cksource.com/CKEditor_3.x/Users_Guide'>website</a> for further information on how to use the editor.</li>
+		<li>Sequence - what position the page will appear in the main menu</li>
+		<li>Published - when ticked will allow visitors to view the page, otherwise the page will only be viewable by people with admin access.</li>
+		<li>Members Only - when ticked the page will only be available to visitors with members access (anyone who registers on web2py-cms).</li>
+	</ul>
+	<h3><a name="Orphan Pages">Orphan Pages</a></h3>
+	<p>
+		Orphan pages is the term used for pages that are not attached to the main menu. To create an Orphan page, simply create a new page in the Pages section and untick the main menu box. The sequence should be left blank also.
+	</p>
+	<p>
+		Once the page has been created you may link to this page from within another pages content.
+	</p>
+
+
+<hr/>
+<h2><a name="Files">Files</a></h2>
+	<p>
+		The Files section stores all files required for the site, admins can upload images or documents and paste links to them in content pages.
+	</p>
+
+<hr/>
+<h2><a name="Users">Users - Super Admins Only</a></h2>
+	<p>
+		The Users section is used to manage user access, by adding or removing users from groups you can change the areas of access the user will have.
+	</p>
+	<h3><a name="Groups">Groups</a></h3>
+	<p>
+		When adding or editing a user, you can also edit the user groups that they belong too. The following user groups are available:
+
+		<ul>
+			<li>Member - Restricted access to only the main site and members content.</li>
+			<li>Admin - Access to the admin section of the website, can add/edit/delete pages and files.</li>
+			<li>Super Admin - Admin access plus can manage users and edit CSS.</li>
+		</ul>
+
+		Note: Users in the Super Admin group still require Admin and Member group access.
+	</p>
+
+<hr/>
+<h2><a name="CSS">CSS - Super Admins Only</a></h2>
+	<p>
+		If the admin wishes to customise the look of the content site then they may add their on custom CSS to this file.
+	</p>
+
+	<ul>
+		<li>CSS General - Any CSS updates you want to make to the site regardless of the device the visitor is using. Warning these changes should be mobile friendly.</li>
+		<li>CSS Mobile - Any CSS updates you want to make to the site that will only affect Mobile visitors.</li>
+		<li>CSS Desktop - Any CSS updates you want to make to the site that will only affect Desktop or non-mobile visitors.</li>
+	</ul>
