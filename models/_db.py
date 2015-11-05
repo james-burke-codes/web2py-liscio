@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import logging
+logger = logging.getLogger("web2py.app.init")
+logger.setLevel(logging.DEBUG)
 
 #########################################################################
 ## This scaffolding model makes your app work on Google App Engine too
@@ -95,23 +98,30 @@ auth.settings.bulk_register_enabled = False
 # auth.enable_record_versioning(db)
 
 def check_initialize():
+
+    if not db().select(db.auth_group.ALL).first():
+        auth.add_group('super_admin', 'Admin powers + user administration')
+        auth.add_group('admin', 'Site content administration')
+        auth.add_group('member', 'Access to membership info')
+
     if not db().select(db.auth_user.ALL).first():        
-        user1 = db.auth_user.insert(
-            password = db.auth_user.password.validate('frosty')[0],
-            email = 'jack.frost@gmail.com',
-            first_name = 'Jack',
-            last_name = 'Frost',
-        )
+        users = []
 
-        users = (user1,)
+        # Uncomment and add your details to create a new user automatically
+        #users.append(db.auth_user.insert(
+        #    password = db.auth_user.password.validate('frosty')[0],
+        #    email = 'jack.frost@gmail.com',
+        #    first_name = 'Jack',
+        #    last_name = 'Frost',
+        #))
+
+        groups = db().select(db.auth_group.id).as_list()
+        # Create groups if a new user was created
         
-        sadmin_group_id = auth.add_group('super_admin', 'Admin powers + user administration')
-        admin_group_id = auth.add_group('admin', 'Site content administration')
-        member_group_id = auth.add_group('member', 'Access to membership info')
 
+        # Add the users to the groups
         for user in users:
-            auth.add_membership(sadmin_group_id, user)
-            auth.add_membership(admin_group_id, user)
-            auth.add_membership(member_group_id, user)
+            for group in groups:
+                auth.add_membership(group['id'], user)
 
 cache.ram('db_initialized', check_initialize(), time_expire=None)
