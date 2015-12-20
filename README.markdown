@@ -12,6 +12,7 @@ Licensed under the MIT License (MIT)
 * File Manager
 * Custom CSS
 * Generated Sitemap
+* User Manager
 
 ## Install
 
@@ -42,4 +43,4 @@ user1 = db.auth_user.insert(
 
 The admin section of the page is accessable through /[app_name]/admin
 
-From here you can manag
+From here your users can manage the content of their website. 
