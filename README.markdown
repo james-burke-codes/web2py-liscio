@@ -2,9 +2,16 @@
 
 web2py-liscio is a content management system (CMS) built on the web2py framework
 
-Learn more at http://web2py.com
+Learn more about web2py at http://web2py.com
 
 Licensed under the MIT License (MIT)
+
+## Features
+
+* Dynamic Page/Menu System
+* File Manager
+* Custom CSS
+* Generated Sitemap
 
 ## Install
 
@@ -30,3 +37,9 @@ user1 = db.auth_user.insert(
   first_name = 'Jack',
   last_name = 'Frost',
   )
+
+## Admin
+
+The admin section of the page is accessable through /[app_name]/admin
+
+From here you can manag
