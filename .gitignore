@@ -1,0 +1,9 @@
+# ignore these folders
+sessions
+uploads
+errors
+databases
+
+# ignore all pyc files
+*.pyc
+.DS_Store
