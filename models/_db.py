@@ -111,7 +111,6 @@ auth.settings.reset_password_requires_verification = True
 
 auth.settings.create_user_groups = False
 auth.settings.everybody_group_id = auth.id_group(role='user')
-auth.settings.actions_disabled.append('register')
 
 # -------------------------------------------------------------------------
 # Define your tables below (or better in another model file) for example
