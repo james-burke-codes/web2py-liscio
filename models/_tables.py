@@ -11,13 +11,11 @@ def advanced_editor(field, value):
 #    Field('main_menu', 'boolean'))
 
 db.define_table('cms_page',
-    Field('title'), # , unique=True
+    Field('title'),
     Field('url', default=None, comment='Redirect to external page'),
     Field('main_menu', 'boolean', default=True, comment='add to the main menu'),
-    #Field('parent_menu', 'reference cms_page', default=None),
     Field('parent_menu', default=None),
     Field('body', 'text', default=''),
-    Field('side', 'text', default=''),
     Field('created_on', 'datetime', default=request.now),
     Field('created_by', db.auth_user, default=auth.user_id),
     Field('page_index', 'integer', comment='position page will appear on the main menu, blank if n/a' ),
@@ -28,7 +26,6 @@ db.define_table('cms_page',
 
 
 db.cms_page.body.widget = advanced_editor
-db.cms_page.side.widget = advanced_editor
 
 db.cms_page.created_by.readable = db.cms_page.created_by.writable = False
 db.cms_page.created_on.readable = db.cms_page.created_on.writable = False
@@ -47,8 +44,7 @@ db.cms_page.page_index.default = len(db((db.cms_page.id>0) & (db.cms_page.main_m
 #
 
 db.define_table('cms_file',
-    Field('cms_file', 'upload'),
-    #Field('name', default=lambda v=request.post_vars:v.cms_file.cms_filename if v.cms_file else ''), #db.cms_file.cms_file.retrieve(r.cms_file)[0]
+    Field('cms_file', 'upload', required=True),
     Field('created_on', 'datetime', default=request.now),
     Field('created_by', 'reference auth_user', default=auth.user_id),
     format='%(name)s')
