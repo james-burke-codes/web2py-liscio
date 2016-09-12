@@ -79,13 +79,13 @@ for cms_page in cms_pages:
             sub_items = []
 
             for i in db(db.cms_page.parent_menu == cms_page.id).select(db.cms_page.id, db.cms_page.title, db.cms_page.parent_menu, db.cms_page.page_index, orderby=[db.cms_page.page_index]):
-                sub_items += (T(i.title), False, URL('default','page/%s/%s' % (i.id, i.title.lower()))) # , []
+                sub_items += (T(i.title), False, URL('default','page/%s/%s' % (i.id, i.title.lower())), [])
             if sub_items:
-                response.menu+=[ (T(cms_page.title), True if active_path == str(cms_page.title.lower()) else False, URL('default','page/%s/%s' % (cms_page.id, cms_page.title.lower())), [sub_items])]
+                response.menu+=[ (T(cms_page.title), False, URL('default','page/%s/%s' % (cms_page.id, cms_page.title.lower())), [sub_items])]
             else: 
-                response.menu+=[ (T(cms_page.title), True if active_path == str(cms_page.title.lower()) else False, URL('default','page/%s/%s' % (cms_page.id, cms_page.title.lower())))]
+                response.menu+=[ (T(cms_page.title), False, URL('default','page/%s/%s' % (cms_page.id, cms_page.title.lower())))]
         elif cms_page.url:
-            response.menu+=[ (T(cms_page.title), True if active_path == str(cms_page.title.lower()) else False, cms_page.url, []) ]
+            response.menu+=[ (T(cms_page.title), False, cms_page.url, []) ]
 
 if "auth" in locals():
     auth.wikimenu()
